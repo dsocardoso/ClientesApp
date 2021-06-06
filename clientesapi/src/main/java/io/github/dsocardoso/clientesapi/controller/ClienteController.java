@@ -8,32 +8,39 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/clientes")
+@CrossOrigin("http://localhost:4200")
 public class ClienteController {
 
     private final ClienteRepository repository;
 
     @Autowired
-    public ClienteController(ClienteRepository repository){
+    public ClienteController(ClienteRepository repository) {
         this.repository = repository;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente salvar(@RequestBody @Valid Cliente cliente){
+    public Cliente salvar(@RequestBody @Valid Cliente cliente) {
         return repository.save(cliente);
     }
 
     @GetMapping("/{id}")
-    public Cliente acharPorId(@PathVariable Integer id){
-       return repository.findById(id).orElseThrow( ()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public Cliente acharPorId(@PathVariable Integer id) {
+        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping
+    public List<Cliente> buscarClientes() {
+        return repository.findAll();
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletar(@PathVariable Integer id){
+    public void deletar(@PathVariable Integer id) {
         repository
                 .findById(id)
                 .map(cliente -> {
