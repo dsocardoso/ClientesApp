@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientesService } from 'src/app/clientes.service';
 import { Cliente } from '../cliente';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
  
 @Component({
   selector: 'app-clientes-lista',
@@ -24,6 +24,10 @@ export class ClientesListaComponent implements OnInit {
 
   novoCadastro() {
     this.router.navigate(['/clientes-form']);
+  }
+
+  redirectAtualizar(id: number){
+    this.router.navigate([`clientes-form/${id}`]);
   }
 
 }

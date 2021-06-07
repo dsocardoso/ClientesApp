@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Cliente } from '../cliente';
 import { ClientesService } from '../../clientes.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-clientes-form',
@@ -15,26 +15,51 @@ export class ClientesFormComponent implements OnInit {
   cliente: Cliente;
   success = false;
   errors: string[];
+  id: number;
 
-  constructor(private service: ClientesService, private router: Router) {
+  constructor(
+    private service: ClientesService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+    ) {
       this.cliente = new Cliente();
    }
 
   ngOnInit(): void {
+    const params = this.activatedRoute.params;
+    if (params && params['_value'].id){
+      this.id = params['_value'].id;
+      this.service.getClienteById(this.id).subscribe(
+        response => {
+          this.cliente = response;
+        }
+      );
+    }
   }
 
   // salvar dados
   onSubmit(){
-   this.service
-   .salvar(this.cliente)
-   .subscribe( response =>{
-     this.success = true;
-     this.errors = [];
-     this.cliente = response;
-   }, errorResponse => {
-     this.success = false;
-     this.errors = errorResponse.error.errors;
-   });
+   if (this.id) {
+    this.service.atualizar(this.cliente)
+    .subscribe(response => {
+      this.success = true;
+      this.errors = [];
+    }, errorResponse => {
+      this.errors = ['Erro ao atualizar o cliente'];
+      this.success = false;
+    });
+   } else {
+    this.service
+    .salvar(this.cliente)
+    .subscribe( response =>{
+      this.success = true;
+      this.errors = [];
+      this.cliente = response;
+    }, errorResponse => {
+      this.success = false;
+      this.errors = errorResponse.error.errors;
+    });
+   }
   }
 
   voltarParaListagem(){
