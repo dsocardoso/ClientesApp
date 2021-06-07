@@ -25,6 +25,7 @@ export class ClientesFormComponent implements OnInit {
       this.cliente = new Cliente();
    }
 
+  // buscar dados do cliente por id
   ngOnInit(): void {
     const params = this.activatedRoute.params;
     if (params && params['_value'].id){
