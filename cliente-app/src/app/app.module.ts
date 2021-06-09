@@ -1,3 +1,4 @@
+import { ServicoPrestadoModule } from './servico-prestado/servico-prestado.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,8 +10,9 @@ import { TemplateModule } from './template/template.module';
 import { HomeComponent } from './home/home.component';
 import { ClientesModule } from './clientes/clientes.module';
 import { ClientesService } from './clientes.service';
+import { ServicoPrestadoService } from './servico-prestado.service';
 
- 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,10 +23,12 @@ import { ClientesService } from './clientes.service';
     HttpClientModule,
     AppRoutingModule,
     TemplateModule,
-    ClientesModule
+    ClientesModule,
+    ServicoPrestadoModule
   ],
   providers: [
-    ClientesService // toda classe que queremos injetar, deve ser declarada dentro do provider
+    ClientesService,
+    ServicoPrestadoService // toda classe que queremos injetar, deve ser declarada dentro do provider
   ],
   bootstrap: [AppComponent]
 })
