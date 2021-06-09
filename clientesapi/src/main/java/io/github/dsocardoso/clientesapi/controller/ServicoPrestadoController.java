@@ -7,8 +7,6 @@ import io.github.dsocardoso.clientesapi.model.repository.ClienteRepository;
 import io.github.dsocardoso.clientesapi.model.repository.ServicoPrestadoRepository;
 import io.github.dsocardoso.clientesapi.util.BigDecimalConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -54,6 +52,6 @@ public class ServicoPrestadoController {
             @RequestParam(value = "nome", required = false, defaultValue = "") String nome,
             @RequestParam(value = "mes", required = false) Integer mes) {
 
-        return repository.findByNomeAndMes("%" + nome + "%",mes);
+        return repository.findByNomeAndMes("%" + nome + "%", mes);
     }
 }
