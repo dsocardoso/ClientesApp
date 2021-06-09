@@ -44,6 +44,6 @@ export class ServicoPrestadoFormComponent implements OnInit {
     });
   }
   voltarLista(){
-    this.router.navigate(['/servico-prestado-listagem']);
+    this.router.navigate(['/servicos-prestados/lista']);
   }
 }
