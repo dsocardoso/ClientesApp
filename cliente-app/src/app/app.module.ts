@@ -14,6 +14,7 @@ import { ClientesService } from './clientes.service';
 import { ServicoPrestadoService } from './servico-prestado.service';
 import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
+import { AuthService } from './auth.service';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { LayoutComponent } from './layout/layout.component';
   ],
   providers: [
     ClientesService,
-    ServicoPrestadoService // toda classe que queremos injetar, deve ser declarada dentro do provider
+    ServicoPrestadoService,
+    AuthService // toda classe que queremos injetar, deve ser declarada dentro do provider
   ],
   bootstrap: [AppComponent]
 })
