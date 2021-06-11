@@ -20,7 +20,9 @@ export class LoginComponent  {
 
   onSubmit() {
     this.authService.tentarLogar(this.username, this.password)
-    .subscribe(response =>{
+    .subscribe(response => {
+      const accessToken = JSON.stringify(response);
+      localStorage.setItem('access_token', accessToken);
       this.router.navigate(['/home']);
     }, onError =>{
       this.mensagemErro = 'Usuário e/ou senha inválidos';

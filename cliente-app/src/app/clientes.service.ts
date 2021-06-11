@@ -16,7 +16,7 @@ export class ClientesService {
   constructor(private http: HttpClient) {  }
 
   salvar(cliente: Cliente): Observable<Cliente> {
-      return this.http.post<Cliente>(`${this.apiURL}/api/clientes`, cliente);
+    return this.http.post<Cliente>(`${this.apiURL}/api/clientes`, cliente);
   }
 
   atualizar(cliente: Cliente): Observable<any> {
