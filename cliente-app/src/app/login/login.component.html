@@ -1,3 +1,4 @@
+<div class="bg-primary">
 <div id="layoutAuthentication">
   <div id="layoutAuthentication_content">
     <main>
@@ -20,7 +21,7 @@
                   <form #loginForm="ngForm" (submit)="onSubmit();">
                     <div class="form-group">
                       <label class="small mb-1">Login</label>
-                      <input type="text" name="username" [(ngModel)]="username" class="form-control py-4" placeholder="Digite seu login">
+                      <input type="text" name="username" [(ngModel)]="username" class="form-control py-4" placeholder="Digite seu login" autocomplete="off">
                     </div>
                     <div class="form-group">
                       <label class="small mb-1">Login</label>
@@ -44,4 +45,5 @@
         </div>
     </main>
   </div>
+</div>
 </div>

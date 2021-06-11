@@ -19,7 +19,12 @@ export class LoginComponent  {
   constructor(private router: Router, private authService: AuthService) { }
 
   onSubmit() {
-    this.router.navigate(['/home']);
+    this.authService.tentarLogar(this.username, this.password)
+    .subscribe(response =>{
+      this.router.navigate(['/home']);
+    }, onError =>{
+      this.mensagemErro = 'Usuário e/ou senha inválidos';
+    });
   }
 
   preparaCadastrar(event){
@@ -40,6 +45,9 @@ export class LoginComponent  {
     .subscribe(response =>{
       this.mensagemSucesso = 'Cadastro realizado com sucesso. Efetue o login.';
       this.mensagemErro = '';
+      this.cadastrando = false;
+      this.username = '';
+      this.password = '';
     }, errorResponse => {
       this.mensagemErro = 'Ocorreu um erro. Tente Novamente mais tarde.';
       this.mensagemSucesso = null;
